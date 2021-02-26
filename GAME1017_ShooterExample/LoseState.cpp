@@ -16,8 +16,8 @@ void LoseState::render()
 	SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 255, 255);
 	SDL_RenderFillRect(m_pRenderer, NULL);
 
-	SDL_RenderCopy(m_pRenderer, m_pButtonTexture, m_pButton1->GetSrcP(), m_pButton1->GetDstP());
-	SDL_RenderCopy(m_pRenderer, m_pButtonTexture, m_pButton2->GetSrcP(), m_pButton2->GetDstP());
+	SDL_RenderCopy(m_pRenderer, m_pButtonTexture1, m_pButton1->GetSrcP(), m_pButton1->GetDstP());
+	SDL_RenderCopy(m_pRenderer, m_pButtonTexture2, m_pButton2->GetSrcP(), m_pButton2->GetDstP());
 }
 
 std::string LoseState::handleEvents()
@@ -57,7 +57,8 @@ bool LoseState::enter(SDL_Window* window, SDL_Renderer* renderer)
 	m_pWindow = window;
 	m_pRenderer = renderer;
 
-	m_pButtonTexture = IMG_LoadTexture(m_pRenderer, "Img/ClickMe.png");
+	m_pButtonTexture1 = IMG_LoadTexture(m_pRenderer, "Img/TitleButton.png");
+	m_pButtonTexture2 = IMG_LoadTexture(m_pRenderer, "Img/RestartButton.png");
 	m_pButton1 = new Button({ 0,0,256,128 }, { 256,192,256,128 });
 	m_pButton2 = new Button({ 0,0,256,128 }, {256,480,256,128 });
 

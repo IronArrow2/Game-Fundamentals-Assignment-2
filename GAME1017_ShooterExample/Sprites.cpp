@@ -33,7 +33,7 @@ void AnimatedSprite::Animate()
 	m_rSrc.x = m_rSrc.w * m_iSprite;
 }
 
-Player::Player(SDL_Rect s, SDL_Rect d):	AnimatedSprite(90, 8, 4, s, d) {}
+Player::Player(SDL_Rect s, SDL_Rect d) : /*Animated*/Sprite(s, d) {}
 
 Bullet::Bullet(SDL_Rect s, SDL_Rect d, int spd) :
 	Sprite(s, d), m_speed(spd), m_active(true) {}
@@ -43,19 +43,17 @@ void Bullet::Update()
 	m_rDst.x += m_speed;
 }
 
-
-
-Enemy::Enemy(SDL_Rect s, SDL_Rect d, vector<Bullet*>* bVec, Mix_Chunk* c, int fr): AnimatedSprite(-90, 4, 4, s, d),
+Enemy::Enemy(SDL_Rect s, SDL_Rect d, vector<Bullet*>* bVec, Mix_Chunk* c, int fr): /*Animated*/Sprite(s, d),
 	m_pBulletVec(bVec), m_pPew(c), m_bulletTimer(0), m_timerMax(fr) {}
 
 void Enemy::Update()
 {
-	Animate();
+	//Animate();
 	m_rDst.x -= 3;
 	if (m_bulletTimer++ == m_timerMax)
 	{
 		m_bulletTimer = 0;
-		m_pBulletVec->push_back(new Bullet( {160,100,14,14}, {m_rDst.x,m_rDst.y-28,14,14}, -10 ));
+		m_pBulletVec->push_back(new Bullet( {843,977,13,37}, {m_rDst.x,m_rDst.y-28,13,37}, -10 ));
 		Mix_PlayChannel(-1, m_pPew, 0);
 	}
 }

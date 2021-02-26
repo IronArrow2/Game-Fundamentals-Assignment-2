@@ -70,13 +70,25 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Img\sprites.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="Img\DiogenesTheCynicTheGame.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Img\ClickMe.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Img\blue.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Img\spritesheet.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Img\ResumeButton.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Img\TitleButton.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Img\RestartButton.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

@@ -24,7 +24,7 @@ std::string MainState::update()
 		bgArray[1].GetDstP()->x = 1024;
 	}
 	// Player animation/movement.
-	m_player->Animate(); // Oh! We're telling the player to animate itself. This is good! Hint hint.
+	//m_player->Animate(); // Oh! We're telling the player to animate itself. This is good! Hint hint.
 	if (KeyDown(SDL_SCANCODE_A, m_iKeystates) && m_player->GetDstP()->x > m_player->GetDstP()->h)
 		m_player->GetDstP()->x -= PSPEED;
 	else if (KeyDown(SDL_SCANCODE_D, m_iKeystates) && m_player->GetDstP()->x < WIDTH / 2)
@@ -49,7 +49,7 @@ std::string MainState::update()
 	// Update enemy spawns.
 	if (m_iESpawn++ == m_iESpawnMax)
 	{
-		m_vEnemies.push_back(new Enemy({ 0,100,40,56 }, { WIDTH,56 + rand() % (HEIGHT - 114),40,56 }, &m_vEBullets, m_vSounds[0],
+		m_vEnemies.push_back(new Enemy({ 423,728,93,84 }, { WIDTH,56 + rand() % (HEIGHT - 114),93,84 }, &m_vEBullets, m_vSounds[0],
 			30 + rand() % 91)); // Randomizing enemy bullet spawn to every 30-120 frames.
 		m_iESpawn = 0;
 	}
@@ -86,7 +86,7 @@ void MainState::render()
 	for (int i = 0; i < 2; i++)
 		SDL_RenderCopy(m_pRenderer, m_pBGText, bgArray[i].GetSrcP(), bgArray[i].GetDstP());
 	// Player.
-	SDL_RenderCopyEx(m_pRenderer, m_pSprText, m_player->GetSrcP(), m_player->GetDstP(), m_player->GetAngle(), &m_pivot, SDL_FLIP_NONE);
+	SDL_RenderCopyEx(m_pRenderer, m_pSprText, m_player->GetSrcP(), m_player->GetDstP(), 90, &m_pivot, SDL_FLIP_NONE);
 	//SDL_SetRenderDrawBlendMode(m_pRenderer, SDL_BLENDMODE_BLEND);
 	//SDL_SetRenderDrawColor(m_pRenderer, 0, 0, 255, 128);
 	//SDL_RenderFillRect(m_pRenderer, m_player->GetDstP());
@@ -106,7 +106,7 @@ void MainState::render()
 	}
 	// Enemy bullets.
 	for (int i = 0; i < (int)m_vEBullets.size(); i++)
-		SDL_RenderCopy(m_pRenderer, m_pSprText, m_vEBullets[i]->GetSrcP(), m_vEBullets[i]->GetDstP());
+		SDL_RenderCopyEx(m_pRenderer, m_pSprText, m_vEBullets[i]->GetSrcP(), m_vEBullets[i]->GetDstP(), -90, &m_pivot, SDL_FLIP_NONE);
 	//SDL_RenderPresent(m_pRenderer);
 }
 
@@ -137,7 +137,7 @@ std::string MainState::handleEvents()
 		if (KeyDown(SDL_SCANCODE_SPACE, m_iKeystates) && m_bCanShoot)
 		{
 			m_bCanShoot = false;
-			m_vPBullets.push_back(new Bullet({ 376,0,10,100 }, { m_player->GetDstP()->x + 85,m_player->GetDstP()->y + 42,10,100 }, 30));
+			m_vPBullets.push_back(new Bullet({ 856,421,9,54 }, { m_player->GetDstP()->x + 54,m_player->GetDstP()->y + 57,9,54 }, 30));
 			Mix_PlayChannel(-1, m_vSounds[1], 0);
 		}
 	}
@@ -150,7 +150,7 @@ std::string MainState::checkCollision()
 	SDL_Rect p = { m_player->GetDstP()->x - 100, m_player->GetDstP()->y, 100, 94 };
 	for (int i = 0; i < (int)m_vEnemies.size(); i++)
 	{
-		SDL_Rect e = { m_vEnemies[i]->GetDstP()->x, m_vEnemies[i]->GetDstP()->y - 40, 56, 40 };
+		SDL_Rect e = { m_vEnemies[i]->GetDstP()->x, m_vEnemies[i]->GetDstP()->y - 40, 93, 84 };
 		if (SDL_HasIntersection(&p, &e))
 		{
 			// Game over!
@@ -162,11 +162,11 @@ std::string MainState::checkCollision()
 	// Player bullets vs. Enemies.
 	for (int i = 0; i < (int)m_vPBullets.size(); i++)
 	{
-		SDL_Rect b = { m_vPBullets[i]->GetDstP()->x - 100, m_vPBullets[i]->GetDstP()->y, 100, 10 };
+		SDL_Rect b = { m_vPBullets[i]->GetDstP()->x - 100, m_vPBullets[i]->GetDstP()->y, 54, 9 };
 		for (int j = 0; j < (int)m_vEnemies.size(); j++)
 		{
 			if (m_vEnemies[j] == nullptr) continue;
-			SDL_Rect e = { m_vEnemies[j]->GetDstP()->x, m_vEnemies[j]->GetDstP()->y - 40, 56, 40 };
+			SDL_Rect e = { m_vEnemies[j]->GetDstP()->x, m_vEnemies[j]->GetDstP()->y - 40, 93, 84 };
 			if (SDL_HasIntersection(&b, &e))
 			{
 				Mix_PlayChannel(-1, m_vSounds[2], 0);
@@ -204,8 +204,8 @@ bool MainState::enter(SDL_Window* window, SDL_Renderer* renderer)
 	m_pWindow = window;
 	m_pRenderer = renderer;
 
-	m_pBGText = IMG_LoadTexture(m_pRenderer, "Img/background.png");
-	m_pSprText = IMG_LoadTexture(m_pRenderer, "Img/sprites.png");
+	m_pBGText = IMG_LoadTexture(m_pRenderer, "Img/blue.png");
+	m_pSprText = IMG_LoadTexture(m_pRenderer, "Img/spritesheet.png");
 	if (Mix_Init(MIX_INIT_MP3) != 0) // Mixer init success.
 	{
 		Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 2048); // Good for most games.
@@ -222,9 +222,9 @@ bool MainState::enter(SDL_Window* window, SDL_Renderer* renderer)
 	else return false;
 
 	m_iKeystates = SDL_GetKeyboardState(nullptr);
-	bgArray[0] = { {0,0,1024,768}, {0, 0, 1024, 768} };
-	bgArray[1] = { {0,0,1024,768}, {1024, 0, 1024, 768} };
-	m_player = new Player( {0,0,94,100}, {256,384-50,94,100} );
+	bgArray[0] = { {0,0,256,256}, {0, 0, 1024, 768} };
+	bgArray[1] = { {0,0,256,256}, {1024, 0, 1024, 768} };
+	m_player = new Player({ 112,791,112,75 }, { 256,384 - 50,112,75 });
 	Mix_PlayMusic(m_pMusic, -1); // Play. -1 = looping.
 	Mix_VolumeMusic(16); // 0-MIX_MAX_VOLUME (128).
 

@@ -34,7 +34,7 @@ public:
 	void Animate();
 };
 
-class Player : public AnimatedSprite
+class Player : public /*Animated*/Sprite
 {
 public:
 	Player(SDL_Rect s, SDL_Rect d);
@@ -51,7 +51,7 @@ public:
 	void Update();
 };
 
-class Enemy : public AnimatedSprite
+class Enemy : public /*Animated*/Sprite
 {
 private:
 	int m_bulletTimer,

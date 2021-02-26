@@ -8,7 +8,7 @@ private:
 	SDL_Window* m_pWindow;
 	SDL_Renderer* m_pRenderer;
 
-	SDL_Texture* m_pButtonTexture;
+	SDL_Texture* m_pButtonTexture1, *m_pButtonTexture2;
 	Button *m_pButton1, *m_pButton2;
 
 	std::string stateID = "LOSE";

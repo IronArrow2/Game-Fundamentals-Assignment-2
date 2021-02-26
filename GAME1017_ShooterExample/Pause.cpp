@@ -49,7 +49,7 @@ bool Pause::enter(SDL_Window* window, SDL_Renderer* renderer)
 	m_pWindow = window;
 	m_pRenderer = renderer;
 
-	m_pButtonTexture = IMG_LoadTexture(m_pRenderer, "Img/ClickMe.png");
+	m_pButtonTexture = IMG_LoadTexture(m_pRenderer, "Img/ResumeButton.png");
 	m_pButton = new Button({ 0,0,256,128 }, { 338,205,256,128 });
 
 	return true;
