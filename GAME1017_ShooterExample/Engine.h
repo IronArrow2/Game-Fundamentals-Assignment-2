@@ -8,7 +8,7 @@
 #include "StateManager.h"
 #include "TitleState.h"
 #include "Pause.h"
-#include "MainState.h"
+#include "ShooterState.h"
 #include "LoseState.h"
 
 class Engine
@@ -36,4 +36,5 @@ public: // Public methods.
 	static Engine* getInstance() { static Engine* instance = new Engine(); return instance; };
 	~Engine();
 	int Run();
+	SDL_Renderer* GetRenderer();
 };

@@ -100,3 +100,17 @@ bool Button::handleEvent(SDL_Event* e)
 	}
 	return pressed;
 }
+
+void Background::Update()
+{
+	// Check if at end of journey.
+	if (GetDstP()->x <= m_endX) // Instead of m_endX: (m_startX - GetDst()->w)
+		GetDstP()->x = m_startX;
+	// Scroll it.
+	GetDstP()->x -= m_scrollSpeed;
+}
+
+/*void Background::Render()
+{
+	SDL_RenderCopy(Engine::getInstance()->GetRenderer(), TEMA::GetTexture("bg"), GetSrcP(), GetDstP());
+}*/

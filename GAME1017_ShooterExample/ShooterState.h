@@ -2,7 +2,7 @@
 #include "Sprites.h"
 #include "GameState.h"
 
-class MainState : public GameState
+class ShooterState : public GameState
 {
 private:
 	bool m_bENull, // These three flags check if we need to clear the respective vectors of nullptrs.
@@ -14,7 +14,7 @@ private:
 	SDL_Renderer* m_pRenderer; // This represents the buffer to draw to.
 
 	SDL_Texture* m_pBGText; // For the bg.
-	Sprite bgArray[2];
+	Background bgArray[2];
 
 	SDL_Texture* m_pSprText; // For the sprites.
 	Player* m_player;
@@ -31,7 +31,7 @@ private:
 
 	std::string stateID = "MAIN";
 public:
-	MainState();
+	ShooterState();
 	std::string update();
 	void render();
 	std::string handleEvents();

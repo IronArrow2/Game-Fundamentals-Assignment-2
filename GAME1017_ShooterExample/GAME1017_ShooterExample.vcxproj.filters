@@ -33,10 +33,13 @@
     <ClCompile Include="TitleState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MainState.cpp">
+    <ClCompile Include="ShooterState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LoseState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SideScrollerState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -62,10 +65,13 @@
     <ClInclude Include="TitleState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MainState.h">
+    <ClInclude Include="ShooterState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LoseState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SideScrollerState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

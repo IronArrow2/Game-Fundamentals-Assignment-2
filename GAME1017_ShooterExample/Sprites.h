@@ -73,3 +73,22 @@ public:
 	bool handleEvent(SDL_Event* e);
 	void Update();
 };
+
+class Background : public Sprite
+{
+private:
+	float m_scrollSpeed, m_startX, m_endX; // m_endX is optional.
+public:
+	Background() : Sprite(), m_scrollSpeed(3)
+	{
+		m_startX = m_rDst.x;
+		m_endX = m_startX - m_rDst.w;
+	}
+	Background(const SDL_Rect s, const SDL_Rect d, float ss) : Sprite(s, d), m_scrollSpeed(ss)
+	{
+		m_startX = m_rDst.x;
+		m_endX = m_startX - m_rDst.w;
+	}
+	void Update();
+	void Render();
+};

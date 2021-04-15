@@ -1,11 +1,11 @@
-#include "MainState.h"
+#include "ShooterState.h"
 #define WIDTH 1024
 #define HEIGHT 768
 #define FPS 60
-#define BGSCROLL 2 // Could these scroll/speed values be handled in the class? Yes. Consider it!
+#define BGSCROLL 2
 #define PSPEED 6
 
-MainState::MainState()
+ShooterState::ShooterState()
 {
 	m_iESpawn = 0;
 	m_iESpawnMax = 60;
@@ -13,16 +13,17 @@ MainState::MainState()
 	m_bEBNull = m_bENull = m_bPBNull = false;
 }
 
-std::string MainState::update()
+std::string ShooterState::update()
 {
 	// Scroll the backgrounds. Check if they need to snap back.
 	for (int i = 0; i < 2; i++)
 		bgArray[i].GetDstP()->x -= BGSCROLL;
+	/*	bgArray[i].Update();
 	if (bgArray[1].GetDstP()->x <= 0)
 	{
 		bgArray[0].GetDstP()->x = 0;
 		bgArray[1].GetDstP()->x = 1024;
-	}
+	}*/
 	// Player animation/movement.
 	//m_player->Animate(); // Oh! We're telling the player to animate itself. This is good! Hint hint.
 	if (KeyDown(SDL_SCANCODE_A, m_iKeystates) && m_player->GetDstP()->x > m_player->GetDstP()->h)
@@ -80,7 +81,7 @@ std::string MainState::update()
 	return checkCollision();
 }
 
-void MainState::render()
+void ShooterState::render()
 {
 	// Render stuff. Background first.
 	for (int i = 0; i < 2; i++)
@@ -110,7 +111,7 @@ void MainState::render()
 	//SDL_RenderPresent(m_pRenderer);
 }
 
-std::string MainState::handleEvents()
+std::string ShooterState::handleEvents()
 {
 	SDL_Event event;
 
@@ -144,7 +145,7 @@ std::string MainState::handleEvents()
 	return "";
 }
 
-std::string MainState::checkCollision()
+std::string ShooterState::checkCollision()
 {
 	// Player vs. Enemy.
 	SDL_Rect p = { m_player->GetDstP()->x - 100, m_player->GetDstP()->y, 100, 94 };
@@ -199,7 +200,7 @@ std::string MainState::checkCollision()
 	return "";
 }
 
-bool MainState::enter(SDL_Window* window, SDL_Renderer* renderer)
+bool ShooterState::enter(SDL_Window* window, SDL_Renderer* renderer)
 {
 	m_pWindow = window;
 	m_pRenderer = renderer;
@@ -222,8 +223,8 @@ bool MainState::enter(SDL_Window* window, SDL_Renderer* renderer)
 	else return false;
 
 	m_iKeystates = SDL_GetKeyboardState(nullptr);
-	bgArray[0] = { {0,0,256,256}, {0, 0, 1024, 768} };
-	bgArray[1] = { {0,0,256,256}, {1024, 0, 1024, 768} };
+	bgArray[0] = { {0,0,256,256}, {0, 0, 1024, 768}, 0.5 };
+	bgArray[1] = { {0,0,256,256}, {1024, 0, 1024, 768}, 0.5 };
 	m_player = new Player({ 112,791,112,75 }, { 256,384 - 50,112,75 });
 	Mix_PlayMusic(m_pMusic, -1); // Play. -1 = looping.
 	Mix_VolumeMusic(16); // 0-MIX_MAX_VOLUME (128).
@@ -231,7 +232,7 @@ bool MainState::enter(SDL_Window* window, SDL_Renderer* renderer)
 	return true;
 }
 
-bool MainState::exit()
+bool ShooterState::exit()
 {
 	for (int i = 0; i < (int)m_vSounds.size(); i++)
 		Mix_FreeChunk(m_vSounds[i]);
@@ -241,7 +242,7 @@ bool MainState::exit()
 	return true;
 }
 
-std::string MainState::getStateID()
+std::string ShooterState::getStateID()
 {
 	return stateID;
 }

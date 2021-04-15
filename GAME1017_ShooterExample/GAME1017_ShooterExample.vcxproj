@@ -119,8 +119,9 @@
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="LoseState.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="MainState.cpp" />
+    <ClCompile Include="ShooterState.cpp" />
     <ClCompile Include="Pause.cpp" />
+    <ClCompile Include="SideScrollerState.cpp" />
     <ClCompile Include="Sprites.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="TitleState.cpp" />
@@ -129,8 +130,9 @@
     <ClInclude Include="Engine.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="LoseState.h" />
-    <ClInclude Include="MainState.h" />
+    <ClInclude Include="ShooterState.h" />
     <ClInclude Include="Pause.h" />
+    <ClInclude Include="SideScrollerState.h" />
     <ClInclude Include="Sprites.h" />
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="TitleState.h" />

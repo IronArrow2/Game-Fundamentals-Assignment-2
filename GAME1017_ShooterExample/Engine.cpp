@@ -65,7 +65,7 @@ void Engine::HandleEvents()
 
 	if (eventReturnCode == "MAIN")
 	{
-		m_pStateManager->changeState(new MainState, m_pWindow, m_pRenderer);
+		m_pStateManager->changeState(new ShooterState, m_pWindow, m_pRenderer);
 	}
 	else if (eventReturnCode == "QUIT")
 	{
@@ -142,3 +142,5 @@ int Engine::Run()
 	Clean();
 	return 0;
 }
+
+SDL_Renderer* Engine::GetRenderer() { return m_pRenderer; }
