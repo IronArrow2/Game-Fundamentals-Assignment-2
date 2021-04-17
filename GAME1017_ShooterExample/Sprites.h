@@ -95,7 +95,17 @@ public:
 
 class SideScrollerPlayer : public Player
 {
+private:
+	enum class PlayerState {MOVE, JUMP, DEAD};
+	PlayerState currentState = PlayerState::MOVE;
+
+	void crouch();
+	void jump();
+	void moveForward();
+	void moveBack();
+	void stop();
 public:
 	void Update();
-	void crouch();
+	void Render(SDL_Renderer *renderer);
+	void HandleEvents(SDL_Event event);
 };

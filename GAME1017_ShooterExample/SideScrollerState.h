@@ -12,7 +12,9 @@ private:
 	SDL_Renderer* m_pRenderer; // This represents the buffer to draw to.
 
 	vector<Background*> m_backgrounds;
-	SDL_Texture* m_backgroundTexture;
+	vector<Background*> m_obstacles;
+
+	SideScrollerPlayer* m_pPlayer;
 
 	std::string stateID = "SIDE SCROLLER";
 public:

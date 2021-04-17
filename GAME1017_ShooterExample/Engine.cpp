@@ -32,6 +32,8 @@ bool Engine::Init(const char* title, int xpos, int ypos, int width, int height, 
 			{
 				TEMA::Init();
 				TEMA::Load("Img/BG.png", "bg");
+				TEMA::Load("Img/PNG/Idle (1).png", "plr");
+
 				//prepare title state
 				m_pStateManager = new StateManager();
 				m_pStateManager->pushState(new TitleState(), m_pWindow, m_pRenderer);

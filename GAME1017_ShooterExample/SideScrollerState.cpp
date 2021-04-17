@@ -60,8 +60,6 @@ bool SideScrollerState::enter(SDL_Window* window, SDL_Renderer* renderer)
 	m_pWindow = window;
 	m_pRenderer = renderer;
 
-	m_backgroundTexture = IMG_LoadTexture(m_pRenderer, "Img/BG.png");
-
 	m_backgrounds.reserve(10);
 	m_backgrounds.push_back(new Background({ 0,0,1024,768 }, { 0,0,1024,768 }, 1));
 	m_backgrounds.push_back(new Background({ 0,0,1024,768 }, { 1024,0,1024,768 }, 1));
@@ -73,7 +71,6 @@ bool SideScrollerState::enter(SDL_Window* window, SDL_Renderer* renderer)
 	m_backgrounds.push_back(new Background({ 1024,512,512,256 }, { 0,512,512,256 }, 4));
 	m_backgrounds.push_back(new Background({ 1024,512,512,256 }, { 512,512,512,256 }, 4));
 	m_backgrounds.push_back(new Background({ 1024,512,512,256 }, { 1024,512,512,256 }, 4));
-
 
 	return true;
 }

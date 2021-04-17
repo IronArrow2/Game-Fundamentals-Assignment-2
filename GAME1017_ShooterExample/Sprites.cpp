@@ -114,3 +114,43 @@ void Background::Render(SDL_Renderer* renderer)
 {
 	SDL_RenderCopy(renderer,TEMA::GetTexture("bg"), GetSrcP(), GetDstP());
 }
+
+void SideScrollerPlayer::crouch()
+{
+	//makes the player enter the slide animation
+}
+
+void SideScrollerPlayer::jump()
+{
+	//makes the player enter the jump animation
+}
+
+void SideScrollerPlayer::moveForward()
+{
+	//makes the player enter the movement animation and moves them forward
+}
+
+void SideScrollerPlayer::moveBack()
+{
+	//makes the player enter the move animation and moves backwards
+}
+
+void SideScrollerPlayer::stop()
+{
+	//makes the player enter the idle animation and stop moving
+}
+
+void SideScrollerPlayer::Update()
+{
+	//cycles through animation frames depending on current state
+}
+
+void SideScrollerPlayer::Render(SDL_Renderer* renderer)
+{
+	//renders the current frame of animation to the screen
+}
+
+void SideScrollerPlayer::HandleEvents(SDL_Event event)
+{
+	//takes in an event and does something with it
+}
