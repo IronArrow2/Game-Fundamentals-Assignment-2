@@ -139,6 +139,7 @@
     <ClInclude Include="Utilities.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Img\BG.png" />
     <Image Include="Img\blue.png" />
     <Image Include="Img\ClickMe.png" />
     <Image Include="Img\DiogenesTheCynicTheGame.png" />

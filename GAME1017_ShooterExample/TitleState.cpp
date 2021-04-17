@@ -21,7 +21,8 @@ std::string TitleState::handleEvents()
 		if (buttonClicked)
 		{
 			cout << "Button clicked!";
-			return "MAIN";
+			return "SIDE SCROLLER";
+			//return "MAIN";
 		}
 
 		switch (event.type)

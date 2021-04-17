@@ -109,8 +109,3 @@ void Background::Update()
 	// Scroll it.
 	GetDstP()->x -= m_scrollSpeed;
 }
-
-/*void Background::Render()
-{
-	SDL_RenderCopy(Engine::getInstance()->GetRenderer(), TEMA::GetTexture("bg"), GetSrcP(), GetDstP());
-}*/
