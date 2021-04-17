@@ -30,6 +30,8 @@ bool Engine::Init(const char* title, int xpos, int ypos, int width, int height, 
 			m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, 0);
 			if (m_pRenderer != nullptr) // Renderer init success.
 			{
+				TEMA::Init();
+				TEMA::Load("Img/BG.png", "bg");
 				//prepare title state
 				m_pStateManager = new StateManager();
 				m_pStateManager->pushState(new TitleState(), m_pWindow, m_pRenderer);

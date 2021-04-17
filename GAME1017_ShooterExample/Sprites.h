@@ -90,4 +90,12 @@ public:
 		m_endX = m_startX - m_rDst.w;
 	}
 	void Update();
+	void Render(SDL_Renderer *renderer);
+};
+
+class SideScrollerPlayer : public Player
+{
+public:
+	void Update();
+	void crouch();
 };

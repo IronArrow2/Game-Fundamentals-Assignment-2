@@ -124,6 +124,7 @@
     <ClCompile Include="SideScrollerState.cpp" />
     <ClCompile Include="Sprites.cpp" />
     <ClCompile Include="StateManager.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="TitleState.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +136,7 @@
     <ClInclude Include="SideScrollerState.h" />
     <ClInclude Include="Sprites.h" />
     <ClInclude Include="StateManager.h" />
+    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="TitleState.h" />
     <ClInclude Include="Utilities.h" />
   </ItemGroup>

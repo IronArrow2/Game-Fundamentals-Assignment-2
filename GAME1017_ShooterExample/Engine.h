@@ -5,6 +5,7 @@
 #include <SDL_ttf.h>
 #include <vector>
 #include "Sprites.h"
+#include "TextureManager.h"
 #include "StateManager.h"
 #include "TitleState.h"
 #include "Pause.h"

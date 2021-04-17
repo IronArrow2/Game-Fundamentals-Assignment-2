@@ -21,7 +21,7 @@ void SideScrollerState::render()
 	// Render stuff, background first
 	for (unsigned int i = 0; i < m_backgrounds.size(); i++)
 	{
-		SDL_RenderCopy(m_pRenderer, m_backgroundTexture, m_backgrounds[i]->GetSrcP(), m_backgrounds[i]->GetDstP());
+		m_backgrounds[i]->Render(m_pRenderer);
 	}
 }
 
