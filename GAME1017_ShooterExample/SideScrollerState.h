@@ -11,6 +11,9 @@ private:
 	SDL_Window* m_pWindow; // This represents the SDL window.
 	SDL_Renderer* m_pRenderer; // This represents the buffer to draw to.
 
+	int m_iBSpawn; // The obstacle spawn frame timer properties.
+	const int m_iBSpawnMax = 480;
+
 	vector<Background*> m_backgrounds;
 	vector<Background*> m_obstacles;
 

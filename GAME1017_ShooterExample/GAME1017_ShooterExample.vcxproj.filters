@@ -106,5 +106,8 @@
     <Image Include="Img\BG.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Img\PNG\PlayerSpriteSheet.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

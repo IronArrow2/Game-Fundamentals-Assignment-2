@@ -2,7 +2,7 @@
 
 SideScrollerState::SideScrollerState()
 {
-
+	m_iBSpawn = 0;
 }
 
 std::string SideScrollerState::update()
@@ -11,6 +11,13 @@ std::string SideScrollerState::update()
 	{
 		m_backgrounds[i]->Update();
 	}
+
+	if (m_iBSpawn++ == m_iBSpawnMax)
+	{//create new obstacle/set of obstacles
+
+	}
+
+	m_pPlayer->Update();
 	return "";
 }
 
@@ -23,6 +30,8 @@ void SideScrollerState::render()
 	{
 		m_backgrounds[i]->Render(m_pRenderer);
 	}
+
+	m_pPlayer->Render(m_pRenderer);
 }
 
 std::string SideScrollerState::handleEvents()
@@ -71,6 +80,8 @@ bool SideScrollerState::enter(SDL_Window* window, SDL_Renderer* renderer)
 	m_backgrounds.push_back(new Background({ 1024,512,512,256 }, { 0,512,512,256 }, 4));
 	m_backgrounds.push_back(new Background({ 1024,512,512,256 }, { 512,512,512,256 }, 4));
 	m_backgrounds.push_back(new Background({ 1024,512,512,256 }, { 1024,512,512,256 }, 4));
+
+	m_pPlayer = new SideScrollerPlayer({1458, 0, 46, 76}, {0, 0, 46, 76});
 
 	return true;
 }

@@ -140,14 +140,79 @@ void SideScrollerPlayer::stop()
 	//makes the player enter the idle animation and stop moving
 }
 
+SideScrollerPlayer::SideScrollerPlayer(SDL_Rect s, SDL_Rect d) : /*Animated*/Player(s, d) {}
+
 void SideScrollerPlayer::Update()
 {
-	//cycles through animation frames depending on current state
+	//cycles through animation frames (changes source rectangle) depending on current state
+	switch (currentState)
+	{
+	case PlayerState::MOVE:
+		switch (currentAnimFrame)
+		{
+		case 0:
+			m_rSrc = { 1458, 0, 46, 76 };
+			m_rDst = {m_rDst.x, m_rDst.y, 46, 76};
+			break;
+		case 1:
+			m_rSrc = { 1539, 0, 47, 76 };
+			m_rDst = { m_rDst.x, m_rDst.y, 47, 76 };
+			break;
+		case 2:
+			m_rSrc = { 1621, 0, 51, 76 };
+			m_rDst = { m_rDst.x, m_rDst.y, 51, 76 };
+			break;
+		case 3:
+			m_rSrc = { 1701, 0, 47, 76 };
+			m_rDst = { m_rDst.x, m_rDst.y, 47, 76 };
+			break;
+		case 4:
+			m_rSrc = { 1782, 0, 47, 76 };
+			m_rDst = { m_rDst.x, m_rDst.y, 47, 76 };
+			break;
+		case 5:
+			m_rSrc = { 1863, 0, 46, 76 };
+			m_rDst = { m_rDst.x, m_rDst.y, 46, 76 };
+			break;
+		case 6:
+			m_rSrc = { 1946, 0, 55, 78 };
+			m_rDst = { m_rDst.x, m_rDst.y, 55, 78 };
+			break;
+		case 7:
+			m_rSrc = { 2032, 0, 62, 77 };
+			m_rDst = { m_rDst.x, m_rDst.y, 62, 77 };
+			break;
+		case 8:
+			m_rSrc = { 2107, 0, 54, 77 };
+			m_rDst = { m_rDst.x, m_rDst.y, 54, 77 };
+			break;
+		case 9:
+			m_rSrc = { 2187, 0, 47, 76 };
+			m_rDst = { m_rDst.x, m_rDst.y, 47, 76 };
+			break;
+		case 10:
+			currentAnimFrame = -1;//reset animation to beginning
+			m_rSrc = { 2268, 0, 46, 76 };
+			m_rDst = { m_rDst.x, m_rDst.y, 46, 76 };
+			break;
+		}
+
+		currentAnimFrame++;
+		break;
+	case PlayerState::JUMP:
+		break;
+	case PlayerState::SLIDE:
+		break;
+	case PlayerState::DEAD:
+		break;
+	}
+	
 }
 
 void SideScrollerPlayer::Render(SDL_Renderer* renderer)
 {
 	//renders the current frame of animation to the screen
+	SDL_RenderCopy(renderer, TEMA::GetTexture("plr"), GetSrcP(), GetDstP());
 }
 
 void SideScrollerPlayer::HandleEvents(SDL_Event event)

@@ -96,8 +96,9 @@ public:
 class SideScrollerPlayer : public Player
 {
 private:
-	enum class PlayerState {MOVE, JUMP, DEAD};
+	enum class PlayerState {MOVE, JUMP, SLIDE, DEAD};
 	PlayerState currentState = PlayerState::MOVE;
+	int currentAnimFrame = 0;
 
 	void crouch();
 	void jump();
@@ -105,6 +106,7 @@ private:
 	void moveBack();
 	void stop();
 public:
+	SideScrollerPlayer(SDL_Rect s, SDL_Rect d);
 	void Update();
 	void Render(SDL_Renderer *renderer);
 	void HandleEvents(SDL_Event event);

@@ -145,6 +145,7 @@
     <Image Include="Img\blue.png" />
     <Image Include="Img\ClickMe.png" />
     <Image Include="Img\DiogenesTheCynicTheGame.png" />
+    <Image Include="Img\PNG\PlayerSpriteSheet.png" />
     <Image Include="Img\RestartButton.png" />
     <Image Include="Img\ResumeButton.png" />
     <Image Include="Img\spritesheet.png" />
