@@ -9,7 +9,6 @@
 #include "StateManager.h"
 #include "TitleState.h"
 #include "Pause.h"
-#include "ShooterState.h"
 #include "SideScrollerState.h"
 #include "LoseState.h"
 

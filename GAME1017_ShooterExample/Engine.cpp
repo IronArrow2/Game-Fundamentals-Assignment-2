@@ -68,11 +68,7 @@ void Engine::HandleEvents()
 {
 	string eventReturnCode = m_pStateManager->handleEventsCurrentState();
 
-	if (eventReturnCode == "MAIN")
-	{
-		m_pStateManager->changeState(new ShooterState, m_pWindow, m_pRenderer);
-	}
-	else if (eventReturnCode == "SIDE SCROLLER")
+	if (eventReturnCode == "SIDE SCROLLER")
 	{
 		m_pStateManager->changeState(new SideScrollerState, m_pWindow, m_pRenderer);
 	}
