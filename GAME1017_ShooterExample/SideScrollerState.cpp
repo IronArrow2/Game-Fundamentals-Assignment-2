@@ -9,77 +9,92 @@ SideScrollerState::SideScrollerState()
 
 std::string SideScrollerState::update()
 {
-	for (unsigned int i = 0; i < m_backgrounds.size(); i++)
+	if (!playerDead)
 	{
-		m_backgrounds[i]->Update();
-	}
-	for (unsigned int i = 0; i < m_obstacles.size(); i++)
-	{
-		m_obstacles[i]->Update();
-		if (m_obstacles[i]->GetDstP()->x < -m_obstacles[i]->GetDstP()->w)
+		for (unsigned int i = 0; i < m_backgrounds.size(); i++)
 		{
-			delete m_obstacles[i];
-			m_obstacles[i] = nullptr;
-			m_bONull = true;
+			m_backgrounds[i]->Update();
 		}
-	}
-	if (m_bONull) CleanVector<Obstacle*>(m_obstacles, m_bONull);
+		for (unsigned int i = 0; i < m_obstacles.size(); i++)
+		{
+			m_obstacles[i]->Update();
+			if (m_obstacles[i]->GetDstP()->x < -m_obstacles[i]->GetDstP()->w)
+			{
+				delete m_obstacles[i];
+				m_obstacles[i] = nullptr;
+				m_bONull = true;
+			}
+		}
+		if (m_bONull) CleanVector<Obstacle*>(m_obstacles, m_bONull);
 
-	if (m_iBSpawn++ == m_iBSpawnMax)
-	{//create new obstacle/set of obstacles
-		int temp = rand() % 9 + 1;
-		switch (temp)
-		{
-		case 9:
-			//ground blade 1
-			m_obstacles.push_back(new Obstacle({0, 0, 124, 123}, {1024, 450, 124, 123}, 4));
-			break;
-		case 1:
-			//ground blade 2
-			m_obstacles.push_back(new Obstacle({ 124, 0, 127, 127 }, { 1024, 450, 127, 127 }, 4));
-			break;
-		case 2:
-			//ground blade 3
-			m_obstacles.push_back(new Obstacle({ 251, 0, 111, 111 }, { 1024, 450, 111, 111 }, 4));
-			break;
-		case 3:
-			//ground spikes 1
-			m_obstacles.push_back(new Obstacle({ 462, 0, 128, 76 }, { 1024, 445, 128, 76 }, 4));
-			break;
-		case 4:
-			//ground spikes 2
-			m_obstacles.push_back(new Obstacle({ 590, 0, 156, 81 }, { 1024, 445, 156, 81 }, 4));
-			break;
-		case 5:
-			//overhead blade 1
-			m_obstacles.push_back(new Obstacle({ 0, 260, 270, 210 }, { 1024, 230, 270, 210 }, 4));
-			m_obstacles.push_back(new Obstacle({388, 0, 16, 260 }, { 1149, 0, 16, 260 }, 4));
-			break;
-		case 6:
-			//overhead blade 2
-			m_obstacles.push_back(new Obstacle({ 270, 260, 172, 193 }, { 1024, 250, 172, 193 }, 4));
-			m_obstacles.push_back(new Obstacle({ 362, 0, 26, 212 }, { 1090, 68, 26, 212 }, 4));
-			m_obstacles.push_back(new Obstacle({420, 0, 26, 115}, { 1090, -27, 26, 115 }, 4));
-			break;
-		case 7:
-			//overhead blade 3
-			m_obstacles.push_back(new Obstacle({ 442, 260, 186, 223 }, { 1024, 220, 186, 223 }, 4));
-			m_obstacles.push_back(new Obstacle({ 388, 0, 16, 260 }, { 1110, -20, 16, 260 }, 4));
-			break;
-		case 8:
-			//overhead blade 4
-			m_obstacles.push_back(new Obstacle({ 628, 260, 366, 85 }, { 1024, 360, 366, 85 }, 4));
-			m_obstacles.push_back(new Obstacle({ 362, 0, 26, 212 }, { 1128, 166, 26, 212 }, 4));
-			m_obstacles.push_back(new Obstacle({ 362, 0, 26, 212 }, { 1128, -26, 26, 212 }, 4));
-			m_obstacles.push_back(new Obstacle({ 362, 0, 26, 212 }, { 1248, 166, 26, 212 }, 4));
-			m_obstacles.push_back(new Obstacle({ 362, 0, 26, 212 }, { 1248, -26, 26, 212 }, 4));
-			break;
+		if (m_iBSpawn++ == m_iBSpawnMax)
+		{//create new obstacle/set of obstacles
+			int temp = rand() % 9 + 1;
+			switch (temp)
+			{
+			case 9:
+				//ground blade 1
+				m_obstacles.push_back(new Obstacle({ 0, 0, 124, 123 }, { 1024, 450, 124, 123 }, 4));
+				break;
+			case 1:
+				//ground blade 2
+				m_obstacles.push_back(new Obstacle({ 124, 0, 127, 127 }, { 1024, 450, 127, 127 }, 4));
+				break;
+			case 2:
+				//ground blade 3
+				m_obstacles.push_back(new Obstacle({ 251, 0, 111, 111 }, { 1024, 450, 111, 111 }, 4));
+				break;
+			case 3:
+				//ground spikes 1
+				m_obstacles.push_back(new Obstacle({ 462, 0, 128, 76 }, { 1024, 445, 128, 76 }, 4));
+				break;
+			case 4:
+				//ground spikes 2
+				m_obstacles.push_back(new Obstacle({ 590, 0, 156, 81 }, { 1024, 445, 156, 81 }, 4));
+				break;
+			case 5:
+				//overhead blade 1
+				m_obstacles.push_back(new Obstacle({ 0, 260, 270, 210 }, { 1024, 230, 270, 210 }, 4));
+				m_obstacles.push_back(new Obstacle({ 388, 0, 16, 260 }, { 1149, 0, 16, 260 }, 4));
+				break;
+			case 6:
+				//overhead blade 2
+				m_obstacles.push_back(new Obstacle({ 270, 260, 172, 193 }, { 1024, 250, 172, 193 }, 4));
+				m_obstacles.push_back(new Obstacle({ 362, 0, 26, 212 }, { 1090, 68, 26, 212 }, 4));
+				m_obstacles.push_back(new Obstacle({ 420, 0, 26, 115 }, { 1090, -27, 26, 115 }, 4));
+				break;
+			case 7:
+				//overhead blade 3
+				m_obstacles.push_back(new Obstacle({ 442, 260, 186, 223 }, { 1024, 220, 186, 223 }, 4));
+				m_obstacles.push_back(new Obstacle({ 388, 0, 16, 260 }, { 1110, -20, 16, 260 }, 4));
+				break;
+			case 8:
+				//overhead blade 4
+				m_obstacles.push_back(new Obstacle({ 628, 260, 366, 85 }, { 1024, 360, 366, 85 }, 4));
+				m_obstacles.push_back(new Obstacle({ 362, 0, 26, 212 }, { 1128, 166, 26, 212 }, 4));
+				m_obstacles.push_back(new Obstacle({ 362, 0, 26, 212 }, { 1128, -26, 26, 212 }, 4));
+				m_obstacles.push_back(new Obstacle({ 362, 0, 26, 212 }, { 1248, 166, 26, 212 }, 4));
+				m_obstacles.push_back(new Obstacle({ 362, 0, 26, 212 }, { 1248, -26, 26, 212 }, 4));
+				break;
+			}
+			m_iBSpawn = 0;
 		}
-		m_iBSpawn = 0;
+	}
+	else
+	{
+		playerDeathTimer++;
+		if (m_pPlayer->GetDstP()->y <= 450)
+		{
+			m_pPlayer->GetDstP()->y = m_pPlayer->GetDstP()->y + 3;
+		}
+		if (playerDeathTimer == playerDeathTimerMax)
+		{
+			return "LOSE";
+		}
 	}
 
 	m_pPlayer->Update();
-	return "";
+	return checkCollision();
 }
 
 void SideScrollerState::render()
@@ -130,12 +145,28 @@ std::string SideScrollerState::handleEvents()
 
 std::string SideScrollerState::checkCollision()
 {
+	SDL_Rect p = { m_pPlayer->GetDstP()->x, m_pPlayer->GetDstP()->y, m_pPlayer->GetDstP()->w, m_pPlayer->GetDstP()->h };
+	for (int i = 0; i < (int)m_obstacles.size(); i++)
+	{
+		SDL_Rect o = { m_obstacles[i]->GetDstP()->x, m_obstacles[i]->GetDstP()->y, m_obstacles[i]->GetDstP()->w, m_obstacles[i]->GetDstP()->h };
+		if (SDL_HasIntersection(&p, &o))
+		{
+			// Game over!
+			cout << "Player goes boom!" << endl;
+			m_pPlayer->die();
+			playerDead = true;
+			//Mix_PlayChannel(-1, m_vSounds[2], 0);
+			//return "LOSE";
+		}
+	}
+
 	return "";
 }
 
 bool SideScrollerState::enter(SDL_Window* window, SDL_Renderer* renderer)
 {
 	srand(time(NULL));
+	playerDeathTimer = 0;
 	m_pWindow = window;
 	m_pRenderer = renderer;
 

@@ -125,6 +125,8 @@ void SideScrollerPlayer::slide()
 void SideScrollerPlayer::jump()
 {
 	//makes the player enter the jump animation and sends them upward
+	currentState = PlayerState::JUMP;
+	jumpingUp = true;
 }
 
 void SideScrollerPlayer::moveForward()
@@ -236,6 +238,24 @@ void SideScrollerPlayer::Update()
 	case PlayerState::JUMP:
 		m_rSrc = { 1377, 0, 59, 77 };
 		m_rDst = { m_rDst.x, m_rDst.y, 59, 77 };
+		if (!(currentJumpHeight >= maxJumpHeight) && jumpingUp)
+		{
+			m_rDst.y = m_rDst.y - 3;
+			currentJumpHeight = currentJumpHeight + 3;
+		}
+		else if (!(currentJumpHeight <= minJumpHeight) && !jumpingUp)
+		{
+			m_rDst.y = m_rDst.y + 3;
+			currentJumpHeight = currentJumpHeight - 3;
+		}
+		else if (currentJumpHeight >= maxJumpHeight)
+		{
+			jumpingUp = false;
+		}
+		else if (currentJumpHeight <= minJumpHeight)
+		{
+			stop();
+		}
 		break;
 	case PlayerState::SLIDE:
 		currentAnimFrame = 0;
@@ -243,6 +263,101 @@ void SideScrollerPlayer::Update()
 		m_rDst = { m_rDst.x, m_rDst.y, 77, 60 };
 		break;
 	case PlayerState::DEAD:
+		if (currentAnimFrame == 0 || currentAnimFrame == 1 || currentAnimFrame == 2)
+		{
+			m_rSrc = { 0, 0, 45, 77 };
+			m_rDst = { m_rDst.x, m_rDst.y, 45, 77 };
+		}
+		else if (currentAnimFrame == 3 || currentAnimFrame == 4 || currentAnimFrame == 5)
+		{
+			m_rSrc = { 81, 0, 47, 77 };
+			m_rDst = { m_rDst.x, m_rDst.y, 47, 77 };
+		}
+		else if (currentAnimFrame == 6 || currentAnimFrame == 7 || currentAnimFrame == 8)
+		{
+			m_rSrc = { 162, 0, 49, 73 };
+			m_rDst = { m_rDst.x, m_rDst.y + 1, 49, 73 };
+		}
+		else if (currentAnimFrame == 9 || currentAnimFrame == 10 || currentAnimFrame == 11)
+		{
+			m_rSrc = { 243, 0, 48, 71 };
+			m_rDst = { m_rDst.x, m_rDst.y, 48, 71 };
+		}
+		else if (currentAnimFrame == 12 || currentAnimFrame == 13 || currentAnimFrame == 14)
+		{
+			m_rSrc = { 324, 0, 47, 69 };
+			m_rDst = { m_rDst.x, m_rDst.y + 1, 47, 69 };
+		}
+		else if (currentAnimFrame == 15 || currentAnimFrame == 16 || currentAnimFrame == 17)
+		{
+			m_rSrc = { 405, 0, 46, 68 };
+			m_rDst = { m_rDst.x, m_rDst.y, 46, 68 };
+		}
+		else if (currentAnimFrame == 18 || currentAnimFrame == 19 || currentAnimFrame == 20)
+		{
+			m_rSrc = { 486, 0, 46, 68 };
+			m_rDst = { m_rDst.x, m_rDst.y, 46, 68 };
+		}
+		else if (currentAnimFrame == 21 || currentAnimFrame == 22 || currentAnimFrame == 23)
+		{
+			m_rSrc = { 567, 0, 47, 69 };
+			m_rDst = { m_rDst.x, m_rDst.y, 47, 69 };
+		}
+		else if (currentAnimFrame == 24 || currentAnimFrame == 25 || currentAnimFrame == 26)
+		{
+			m_rSrc = { 648, 0, 50, 67 };
+			m_rDst = { m_rDst.x, m_rDst.y, 50, 67 };
+		}
+		else if (currentAnimFrame == 27 || currentAnimFrame == 28 || currentAnimFrame == 29)
+		{
+			m_rSrc = { 729, 0, 62, 62 };
+			m_rDst = { m_rDst.x, m_rDst.y + 1, 62, 62 };
+		}
+		else if (currentAnimFrame == 30 || currentAnimFrame == 31 || currentAnimFrame == 32)
+		{
+			m_rSrc = { 810, 0, 71, 61 };
+			m_rDst = { m_rDst.x, m_rDst.y + 1, 71, 61 };
+		}
+		else if (currentAnimFrame == 33 || currentAnimFrame == 34 || currentAnimFrame == 35)
+		{
+			m_rSrc = { 892, 0, 76, 58 };
+			m_rDst = { m_rDst.x, m_rDst.y + 1, 76, 58 };
+		}
+		else if (currentAnimFrame == 36 || currentAnimFrame == 37 || currentAnimFrame == 38)
+		{
+			m_rSrc = { 972, 0, 78, 55 };
+			m_rDst = { m_rDst.x, m_rDst.y + 1, 78, 55 };
+		}
+		else if (currentAnimFrame == 39 || currentAnimFrame == 40 || currentAnimFrame == 41)
+		{
+			m_rSrc = { 1054, 0, 81, 50 };
+			m_rDst = { m_rDst.x, m_rDst.y + 1, 81, 50 };
+		}
+		else if (currentAnimFrame == 42 || currentAnimFrame == 43 || currentAnimFrame == 44)
+		{
+			m_rSrc = { 1134, 0, 81, 48 };
+			m_rDst = { m_rDst.x, m_rDst.y + 1, 81, 48 };
+		}
+		else if (currentAnimFrame == 45 || currentAnimFrame == 46 || currentAnimFrame == 47)
+		{
+			m_rSrc = { 1215, 0, 80, 46 };
+			m_rDst = { m_rDst.x, m_rDst.y + 1, 80, 46 };
+		}
+		else if (currentAnimFrame == 48 || currentAnimFrame == 49 || currentAnimFrame == 50)
+		{
+			m_rSrc = { 1296, 0, 80, 45 };
+			m_rDst = { m_rDst.x, m_rDst.y + 1, 80, 45 };
+		}
+		else
+		{
+			m_rSrc = { 1296, 0, 80, 45 };
+			m_rDst = { m_rDst.x, m_rDst.y, 80, 45 };
+		}
+
+		if (!(currentAnimFrame >= 51))
+		{
+			currentAnimFrame++;
+		}
 		break;
 	}
 	
@@ -278,11 +393,16 @@ void SideScrollerPlayer::HandleEvents(SDL_Event event)
 	}
 	else if (event.type == SDL_KEYUP)
 	{
-		if (event.key.keysym.sym == SDLK_w || event.key.keysym.sym == SDLK_SPACE || event.key.keysym.sym == SDLK_s)
+		if (event.key.keysym.sym == SDLK_s)
 		{
 			stop();
 		}
 	}
+}
+
+void SideScrollerPlayer::die()
+{
+	currentState = PlayerState::DEAD;
 }
 
 void Obstacle::Update()

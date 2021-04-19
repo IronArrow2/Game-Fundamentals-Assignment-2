@@ -16,7 +16,9 @@ private:
 
 	int m_iBSpawn; // The obstacle spawn frame timer properties.
 	const int m_iBSpawnMax = 120;
-	bool m_bONull = false;
+	bool m_bONull = false, playerDead = false;
+	int playerDeathTimer;
+	const int playerDeathTimerMax = 300;
 
 	vector<Background*> m_backgrounds;
 	vector<Obstacle*> m_obstacles;

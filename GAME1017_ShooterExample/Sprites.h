@@ -113,6 +113,9 @@ private:
 	enum class PlayerState {MOVE, JUMP, SLIDE, DEAD};
 	PlayerState currentState = PlayerState::MOVE;
 	int currentAnimFrame = 0;
+	int currentJumpHeight;
+	const int maxJumpHeight = 150, minJumpHeight = 0;
+	bool jumpingUp = false;
 
 	void slide();
 	void jump();
@@ -120,8 +123,9 @@ private:
 	void moveBack();
 	void stop();
 public:
-	SideScrollerPlayer(SDL_Rect s, SDL_Rect d) : /*Animated*/Player(s, d) {}
+	SideScrollerPlayer(SDL_Rect s, SDL_Rect d) : /*Animated*/Player(s, d) { currentJumpHeight = 0; }
 	void Update();
 	void Render(SDL_Renderer *renderer);
 	void HandleEvents(SDL_Event event);
+	void die();
 };

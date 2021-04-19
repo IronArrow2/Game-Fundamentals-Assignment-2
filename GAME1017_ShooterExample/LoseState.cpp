@@ -36,7 +36,7 @@ std::string LoseState::handleEvents()
 		if (button2Clicked)
 		{
 			cout << "Button 2 clicked!";
-			return "MAIN";
+			return "SIDE SCROLLER";
 		}
 		switch (event.type)
 		{
