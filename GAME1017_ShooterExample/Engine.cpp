@@ -31,7 +31,7 @@ bool Engine::Init(const char* title, int xpos, int ypos, int width, int height, 
 			if (m_pRenderer != nullptr) // Renderer init success.
 			{
 				TEMA::Init();
-				TEMA::Load("Img/BG.png", "bg");
+				TEMA::Load("Img/BackgroundSpriteSheet.png", "bg");
 				TEMA::Load("Img/PlayerSpriteSheet.png", "plr");
 				TEMA::Load("Img/ObstacleSpriteSheet.png", "obs");
 

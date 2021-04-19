@@ -20,10 +20,13 @@ private:
 	int playerDeathTimer;
 	const int playerDeathTimerMax = 300;
 
-	vector<Background*> m_backgrounds;
+	vector<Background*> m_backgrounds, m_foregrounds;
 	vector<Obstacle*> m_obstacles;
 
 	SideScrollerPlayer* m_pPlayer;
+
+	Mix_Music* m_pMusic;
+	vector<Mix_Chunk*> m_vSounds;
 
 	std::string stateID = "SIDE SCROLLER";
 public:
