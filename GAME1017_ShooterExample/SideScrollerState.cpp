@@ -53,18 +53,26 @@ std::string SideScrollerState::update()
 		case 5:
 			//overhead blade 1
 			m_obstacles.push_back(new Obstacle({ 0, 260, 270, 210 }, { 1024, 230, 270, 210 }, 4));
+			m_obstacles.push_back(new Obstacle({388, 0, 16, 260 }, { 1149, 0, 16, 260 }, 4));
 			break;
 		case 6:
 			//overhead blade 2
 			m_obstacles.push_back(new Obstacle({ 270, 260, 172, 193 }, { 1024, 250, 172, 193 }, 4));
+			m_obstacles.push_back(new Obstacle({ 362, 0, 26, 212 }, { 1090, 68, 26, 212 }, 4));
+			m_obstacles.push_back(new Obstacle({420, 0, 26, 115}, { 1090, -27, 26, 115 }, 4));
 			break;
 		case 7:
 			//overhead blade 3
 			m_obstacles.push_back(new Obstacle({ 442, 260, 186, 223 }, { 1024, 220, 186, 223 }, 4));
+			m_obstacles.push_back(new Obstacle({ 388, 0, 16, 260 }, { 1110, -20, 16, 260 }, 4));
 			break;
 		case 8:
 			//overhead blade 4
 			m_obstacles.push_back(new Obstacle({ 628, 260, 366, 85 }, { 1024, 360, 366, 85 }, 4));
+			m_obstacles.push_back(new Obstacle({ 362, 0, 26, 212 }, { 1128, 166, 26, 212 }, 4));
+			m_obstacles.push_back(new Obstacle({ 362, 0, 26, 212 }, { 1128, -26, 26, 212 }, 4));
+			m_obstacles.push_back(new Obstacle({ 362, 0, 26, 212 }, { 1248, 166, 26, 212 }, 4));
+			m_obstacles.push_back(new Obstacle({ 362, 0, 26, 212 }, { 1248, -26, 26, 212 }, 4));
 			break;
 		}
 		m_iBSpawn = 0;
