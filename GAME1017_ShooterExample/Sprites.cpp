@@ -115,29 +115,65 @@ void Background::Render(SDL_Renderer* renderer)
 	SDL_RenderCopy(renderer,TEMA::GetTexture("bg"), GetSrcP(), GetDstP());
 }
 
-void SideScrollerPlayer::crouch()
+void SideScrollerPlayer::slide()
 {
 	//makes the player enter the slide animation
+	currentState = PlayerState::SLIDE;
+	m_rDst = { m_rDst.x, m_rDst.y + 20, 77, 60 };
 }
 
 void SideScrollerPlayer::jump()
 {
-	//makes the player enter the jump animation
+	//makes the player enter the jump animation and sends them upward
 }
 
 void SideScrollerPlayer::moveForward()
 {
 	//makes the player enter the movement animation and moves them forward
+	switch (currentState)
+	{
+	case PlayerState::MOVE:
+		m_rDst.x = m_rDst.x + 4;
+		break;
+	case PlayerState::JUMP:
+		m_rDst.x = m_rDst.x + 2;
+		break;//moving while jumping is more difficult
+	case PlayerState::SLIDE:
+		m_rDst.x = m_rDst.x + 2;
+		break;//and while sliding
+	case PlayerState::DEAD:
+		break;//can't move if you're dead
+	}
 }
 
 void SideScrollerPlayer::moveBack()
 {
 	//makes the player enter the move animation and moves backwards
+	switch (currentState)
+	{
+	case PlayerState::MOVE:
+		m_rDst.x = m_rDst.x - 4;
+		break;
+	case PlayerState::JUMP:
+		m_rDst.x = m_rDst.x - 2;
+		break;//moving while jumping is more difficult
+	case PlayerState::SLIDE:
+		m_rDst.x = m_rDst.x - 2;
+		break;//and while sliding
+	case PlayerState::DEAD:
+		break;//can't move if you're dead
+	}
 }
 
 void SideScrollerPlayer::stop()
 {
-	//makes the player enter the idle animation and stop moving
+	//makes the player enter the running animation
+	if (currentState == PlayerState::SLIDE)
+	{
+		m_rDst = { m_rDst.x, m_rDst.y - 20, 46, 76 };
+	}
+	currentAnimFrame = 0;
+	currentState = PlayerState::MOVE;
 }
 
 SideScrollerPlayer::SideScrollerPlayer(SDL_Rect s, SDL_Rect d) : /*Animated*/Player(s, d) {}
@@ -175,15 +211,15 @@ void SideScrollerPlayer::Update()
 			m_rDst = { m_rDst.x, m_rDst.y, 46, 76 };
 			break;
 		case 6:
-			m_rSrc = { 1946, 0, 55, 78 };
+			m_rSrc = { 1944, 0, 55, 78 };
 			m_rDst = { m_rDst.x, m_rDst.y, 55, 78 };
 			break;
 		case 7:
-			m_rSrc = { 2032, 0, 62, 77 };
+			m_rSrc = { 2025, 0, 62, 77 };
 			m_rDst = { m_rDst.x, m_rDst.y, 62, 77 };
 			break;
 		case 8:
-			m_rSrc = { 2107, 0, 54, 77 };
+			m_rSrc = { 2106, 0, 54, 77 };
 			m_rDst = { m_rDst.x, m_rDst.y, 54, 77 };
 			break;
 		case 9:
@@ -200,8 +236,13 @@ void SideScrollerPlayer::Update()
 		currentAnimFrame++;
 		break;
 	case PlayerState::JUMP:
+		m_rSrc = { 1377, 0, 59, 77 };
+		m_rDst = { m_rDst.x, m_rDst.y, 59, 77 };
 		break;
 	case PlayerState::SLIDE:
+		currentAnimFrame = 0;
+		m_rSrc = { 2349, 0, 77, 60 };
+		m_rDst = { m_rDst.x, m_rDst.y, 77, 60 };
 		break;
 	case PlayerState::DEAD:
 		break;
@@ -218,4 +259,30 @@ void SideScrollerPlayer::Render(SDL_Renderer* renderer)
 void SideScrollerPlayer::HandleEvents(SDL_Event event)
 {
 	//takes in an event and does something with it
+	if (event.type == SDL_KEYDOWN)
+	{
+		if (event.key.keysym.sym == SDLK_a)
+		{
+			moveBack();
+		}
+		else if (event.key.keysym.sym == SDLK_d)
+		{
+			moveForward();
+		}
+		else if ((event.key.keysym.sym == SDLK_w || event.key.keysym.sym == SDLK_SPACE) && currentState != PlayerState::JUMP)
+		{
+			jump();
+		}
+		else if (event.key.keysym.sym == SDLK_s && currentState != PlayerState::SLIDE)
+		{
+			slide();
+		}
+	}
+	else if (event.type == SDL_KEYUP)
+	{
+		if (event.key.keysym.sym == SDLK_w || event.key.keysym.sym == SDLK_SPACE || event.key.keysym.sym == SDLK_s)
+		{
+			stop();
+		}
+	}
 }

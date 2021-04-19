@@ -100,7 +100,7 @@ private:
 	PlayerState currentState = PlayerState::MOVE;
 	int currentAnimFrame = 0;
 
-	void crouch();
+	void slide();
 	void jump();
 	void moveForward();
 	void moveBack();

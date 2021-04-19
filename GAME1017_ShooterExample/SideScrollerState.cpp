@@ -47,13 +47,17 @@ std::string SideScrollerState::handleEvents()
 			break;
 		case SDL_KEYDOWN: // Try SDL_KEYUP instead.
 			if (event.key.keysym.sym == SDLK_ESCAPE)
+			{
 				return "QUIT";
+				break;
+			}
 			else if (event.key.keysym.sym == SDLK_p)
 			{
 				return "PAUSE";
+				break;
 			}
-			break;
 		}
+		m_pPlayer->HandleEvents(event);
 	}
 
 	return "";
@@ -81,7 +85,7 @@ bool SideScrollerState::enter(SDL_Window* window, SDL_Renderer* renderer)
 	m_backgrounds.push_back(new Background({ 1024,512,512,256 }, { 512,512,512,256 }, 4));
 	m_backgrounds.push_back(new Background({ 1024,512,512,256 }, { 1024,512,512,256 }, 4));
 
-	m_pPlayer = new SideScrollerPlayer({1458, 0, 46, 76}, {0, 0, 46, 76});
+	m_pPlayer = new SideScrollerPlayer({1458, 0, 46, 76}, {100, 430, 46, 76});
 
 	return true;
 }
