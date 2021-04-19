@@ -176,8 +176,6 @@ void SideScrollerPlayer::stop()
 	currentState = PlayerState::MOVE;
 }
 
-SideScrollerPlayer::SideScrollerPlayer(SDL_Rect s, SDL_Rect d) : /*Animated*/Player(s, d) {}
-
 void SideScrollerPlayer::Update()
 {
 	//cycles through animation frames (changes source rectangle) depending on current state
@@ -285,4 +283,15 @@ void SideScrollerPlayer::HandleEvents(SDL_Event event)
 			stop();
 		}
 	}
+}
+
+void Obstacle::Update()
+{
+	// Scroll it.
+	GetDstP()->x -= m_scrollSpeed;
+}
+
+void Obstacle::Render(SDL_Renderer* renderer)
+{
+	SDL_RenderCopy(renderer, TEMA::GetTexture("obs"), GetSrcP(), GetDstP());
 }

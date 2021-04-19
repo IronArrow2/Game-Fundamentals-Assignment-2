@@ -1,6 +1,9 @@
 #pragma once
 #ifndef _SIDESCROLLERSTATE_
 #define _SIDESCROLLERSTATE_
+#define WIDTH 1024
+#define HEIGHT 768
+#define FPS 60
 #include "Sprites.h"
 #include "GameState.h"
 
@@ -12,10 +15,11 @@ private:
 	SDL_Renderer* m_pRenderer; // This represents the buffer to draw to.
 
 	int m_iBSpawn; // The obstacle spawn frame timer properties.
-	const int m_iBSpawnMax = 480;
+	const int m_iBSpawnMax = 120;
+	bool m_bONull = false;
 
 	vector<Background*> m_backgrounds;
-	vector<Background*> m_obstacles;
+	vector<Obstacle*> m_obstacles;
 
 	SideScrollerPlayer* m_pPlayer;
 

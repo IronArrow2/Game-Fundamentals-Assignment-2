@@ -76,7 +76,7 @@ public:
 
 class Background : public Sprite
 {
-private:
+protected:
 	float m_scrollSpeed, m_startX, m_endX; // m_endX is optional.
 public:
 	Background() : Sprite(), m_scrollSpeed(3)
@@ -93,6 +93,20 @@ public:
 	void Render(SDL_Renderer *renderer);
 };
 
+//obstacle is essentially the same as background except it draws from a different sprite sheet, and can collide with the player and kill them
+//collision is handled in the game state
+class Obstacle : public Background
+{
+public:
+	Obstacle(SDL_Rect s, SDL_Rect d, float ss) : Background(s, d, ss) 
+	{
+		m_startX = m_rDst.x;
+		m_endX = 0 - m_rDst.w;
+	}
+	void Update();
+	void Render(SDL_Renderer * renderer);
+};
+
 class SideScrollerPlayer : public Player
 {
 private:
@@ -106,7 +120,7 @@ private:
 	void moveBack();
 	void stop();
 public:
-	SideScrollerPlayer(SDL_Rect s, SDL_Rect d);
+	SideScrollerPlayer(SDL_Rect s, SDL_Rect d) : /*Animated*/Player(s, d) {}
 	void Update();
 	void Render(SDL_Renderer *renderer);
 	void HandleEvents(SDL_Event event);
